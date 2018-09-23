@@ -1,4 +1,4 @@
-select so.order_id, sum(i.quantity * price.list_price) as "Item-by-item Sum", so.total as "Listed Sum"
+select so.order_id as "Order ID", sum(i.quantity * price.list_price) as "Item-by-item Sum", so.total as "Listed Sum"
 from sales_order so
     inner join item i on so.order_id = i.order_id
     inner join product on i.product_id = product.product_id
