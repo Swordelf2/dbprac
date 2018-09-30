@@ -63,7 +63,10 @@ CREATE TABLE public."Врач" (
     "Врач_id" integer NOT NULL,
     "Фамилия" character varying(30),
     "Имя" character varying(15),
-    "Отчество" character varying(20)
+    "Отчество" character varying(20),
+    "Время_начала" time without time zone,
+    "Время_окончания" time without time zone,
+    "Кабинет" smallint
 );
 
 
@@ -109,7 +112,8 @@ CREATE TABLE public."Пациент" (
     "Имя" character varying(15),
     "Отчество" character varying(20),
     "Год_рождения" smallint,
-    "Социальный_статус_id" integer
+    "Социальный_статус_id" integer,
+    CONSTRAINT "Пациент_Год_рождения_check" CHECK ((("Год_рождения" >= 1900) AND ("Год_рождения" <= 2018)))
 );
 
 
@@ -122,7 +126,6 @@ ALTER TABLE public."Пациент" OWNER TO swordelf;
 CREATE TABLE public."Прием" (
     "Прием_id" integer NOT NULL,
     "Лечение_id" integer,
-    "Кабинет" integer,
     "Время_начала" timestamp without time zone,
     "Время_окончания" timestamp without time zone
 );
@@ -170,7 +173,7 @@ ALTER TABLE public."Специализация" OWNER TO swordelf;
 -- Data for Name: Врач; Type: TABLE DATA; Schema: public; Owner: swordelf
 --
 
-COPY public."Врач" ("Врач_id", "Фамилия", "Имя", "Отчество") FROM stdin;
+COPY public."Врач" ("Врач_id", "Фамилия", "Имя", "Отчество", "Время_начала", "Время_окончания", "Кабинет") FROM stdin;
 \.
 
 
@@ -202,7 +205,7 @@ COPY public."Пациент" ("Пациент_id", "Номер_полиса", "�
 -- Data for Name: Прием; Type: TABLE DATA; Schema: public; Owner: swordelf
 --
 
-COPY public."Прием" ("Прием_id", "Лечение_id", "Кабинет", "Время_начала", "Время_окончания") FROM stdin;
+COPY public."Прием" ("Прием_id", "Лечение_id", "Время_начала", "Время_окончания") FROM stdin;
 \.
 
 
