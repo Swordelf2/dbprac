@@ -85,6 +85,19 @@ CREATE TABLE public."Врач_Специализация" (
 ALTER TABLE public."Врач_Специализация" OWNER TO swordelf;
 
 --
+-- Name: Диагноз; Type: TABLE; Schema: public; Owner: swordelf
+--
+
+CREATE TABLE public."Диагноз" (
+    "Диагноз_id" integer NOT NULL,
+    "Название" character varying(50),
+    "Описание" character varying(300)
+);
+
+
+ALTER TABLE public."Диагноз" OWNER TO swordelf;
+
+--
 -- Name: Лечение; Type: TABLE; Schema: public; Owner: swordelf
 --
 
@@ -94,8 +107,8 @@ CREATE TABLE public."Лечение" (
     "Врач_id" integer,
     "Дата_начала" date,
     "Дата_окончания" date,
-    "Диагноз" character varying(300),
-    "Состояние_id" integer
+    "Состояние_id" integer,
+    "Диагноз_id" integer
 );
 
 
@@ -186,10 +199,18 @@ COPY public."Врач_Специализация" ("Врач_id", "Специа�
 
 
 --
+-- Data for Name: Диагноз; Type: TABLE DATA; Schema: public; Owner: swordelf
+--
+
+COPY public."Диагноз" ("Диагноз_id", "Название", "Описание") FROM stdin;
+\.
+
+
+--
 -- Data for Name: Лечение; Type: TABLE DATA; Schema: public; Owner: swordelf
 --
 
-COPY public."Лечение" ("Лечение_id", "Пациент_id", "Врач_id", "Дата_начала", "Дата_окончания", "Диагноз", "Состояние_id") FROM stdin;
+COPY public."Лечение" ("Лечение_id", "Пациент_id", "Врач_id", "Дата_начала", "Дата_окончания", "Состояние_id", "Диагноз_id") FROM stdin;
 \.
 
 
@@ -247,6 +268,14 @@ ALTER TABLE ONLY public."Врач"
 
 ALTER TABLE ONLY public."Врач_Специализация"
     ADD CONSTRAINT "Врач_Специализация_pkey" PRIMARY KEY ("Врач_id", "Специализация_id");
+
+
+--
+-- Name: Диагноз Диагноз_pkey; Type: CONSTRAINT; Schema: public; Owner: swordelf
+--
+
+ALTER TABLE ONLY public."Диагноз"
+    ADD CONSTRAINT "Диагноз_pkey" PRIMARY KEY ("Диагноз_id");
 
 
 --
@@ -319,6 +348,14 @@ ALTER TABLE ONLY public."Врач_Специализация"
 
 ALTER TABLE ONLY public."Лечение"
     ADD CONSTRAINT "Лечение_Врач_id_fkey" FOREIGN KEY ("Врач_id") REFERENCES public."Врач"("Врач_id");
+
+
+--
+-- Name: Лечение Лечение_Диагноз_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: swordelf
+--
+
+ALTER TABLE ONLY public."Лечение"
+    ADD CONSTRAINT "Лечение_Диагноз_id_fkey" FOREIGN KEY ("Диагноз_id") REFERENCES public."Диагноз"("Диагноз_id");
 
 
 --
