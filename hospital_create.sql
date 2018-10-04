@@ -111,6 +111,8 @@ alter table Лечение
         references Диагноз(Диагноз_ID);
 
 alter table Терапия
+    add foreign key (Лечение_ID)
+        references Лечение(Лечение_ID),
     add foreign key (Вид_терапии_ID)
         references Вид_терапии(Вид_терапии_ID);
 
