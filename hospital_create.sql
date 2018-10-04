@@ -85,6 +85,13 @@ create table Прием (
     Время_окончания timestamp
 );
 
+create table История_болезней (
+    Лечение_ID integer,
+    Дата_изменения date,
+    Состояние1_ID integer,
+    Состояние2_ID integer,
+        primary key(Лечение_ID, Дата_изменения)
+);
 
 create table Врач_Специализация (
     Врач_ID integer,
@@ -112,6 +119,12 @@ alter table Прием
         references Терапия(Терапия_ID),
     add foreign key (Врач_ID)
         references Врач(Врач_ID);
+
+alter table История_болезней
+    add foreign key (Состояние1_ID)
+        references Состояние(Состояние_ID),
+    add foreign key (Состояние2_ID)
+        references Состояние(Состояние_ID);
 
 alter table Врач_Специализация
     add foreign key (Врач_ID)
