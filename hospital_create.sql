@@ -46,7 +46,9 @@ create table Врач (
     Время_начала time,
     Время_окончания time,
     Кабинет smallint,
-        constraint check_time check (Время_начала <= Время_окончания)
+        constraint check_time check (Время_начала <= Время_окончания),
+        constraint check_cab check (Кабинет is null or
+            Кабинет between 1 and 400)
 );
 
 create table Пациент (
@@ -68,6 +70,7 @@ create table Лечение (
 );
 
 create table Терапия (
+    Терапия_ID integer primary key,
     Лечение_ID integer,
     Вид_терапии_ID integer,
     Начало timestamp,
@@ -88,3 +91,30 @@ create table Врач_Специализация (
     Специализация_ID integer,
         primary key(Врач_ID, Специализация_ID)
 );
+
+-- alter statements
+alter table Пациент
+    add foreign key (Социальный_статус_ID)
+        references Социальный_статус(Социальный_статус_ID);
+
+alter table Лечение
+    add foreign key (Пациент_ID)
+        references Пациент(Пациент_ID),
+    add foreign key (Диагноз_ID)
+        references Диагноз(Диагноз_ID);
+
+alter table Терапия
+    add foreign key (Вид_терапии_ID)
+        references Вид_терапии(Вид_терапии_ID);
+
+alter table Прием
+    add foreign key (Терапия_ID)
+        references Терапия(Терапия_ID),
+    add foreign key (Врач_ID)
+        references Врач(Врач_ID);
+
+alter table Врач_Специализация
+    add foreign key (Врач_ID)
+        references Врач(Врач_ID),
+    add foreign key (Специализация_ID)
+        references Специализация(Специализация_ID);
