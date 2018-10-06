@@ -123,7 +123,9 @@ alter table Прием
 
 alter table История_болезней
     add foreign key (Состояние_ID)
-        references Состояние(Состояние_ID);
+        references Состояние(Состояние_ID),
+    add foreign key (Пациент_ID)
+        references Пациент(Пациент_ID);
 
 alter table Врач_Специализация
     add foreign key (Врач_ID)
