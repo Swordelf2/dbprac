@@ -88,8 +88,7 @@ create table Прием (
 create table История_болезней (
     Лечение_ID integer,
     Дата_изменения date,
-    Состояние1_ID integer,
-    Состояние2_ID integer,
+    Состояние_ID integer,
         primary key(Лечение_ID, Дата_изменения)
 );
 
