@@ -12,7 +12,7 @@ set datestyle to "ISO, DMY";
 
 create table Диагноз (
     Диагноз_ID integer primary key,
-    Название varchar(30) not null,
+    Название varchar(80) not null,
     Описание varchar(300)
 );
 
@@ -73,8 +73,8 @@ create table Терапия (
     Терапия_ID integer primary key,
     Лечение_ID integer,
     Вид_терапии_ID integer,
-    Начало timestamp,
-    Окончание timestamp
+    Начало date,
+    Окончание date
 );
 
 create table Прием (
@@ -86,10 +86,10 @@ create table Прием (
 );
 
 create table История_болезней (
-    Лечение_ID integer,
+    Пациент_ID integer,
     Дата_изменения date,
     Состояние_ID integer,
-        primary key(Лечение_ID, Дата_изменения)
+        primary key(Пациент_ID, Дата_изменения)
 );
 
 create table Врач_Специализация (
@@ -122,9 +122,7 @@ alter table Прием
         references Врач(Врач_ID);
 
 alter table История_болезней
-    add foreign key (Состояние1_ID)
-        references Состояние(Состояние_ID),
-    add foreign key (Состояние2_ID)
+    add foreign key (Состояние_ID)
         references Состояние(Состояние_ID);
 
 alter table Врач_Специализация
