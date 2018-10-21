@@ -86,10 +86,10 @@ create table Прием (
 );
 
 create table История_болезней (
-    Пациент_ID integer,
+    Лечение_ID integer,
     Дата_изменения date,
     Состояние_ID integer,
-        primary key(Пациент_ID, Дата_изменения)
+        primary key(Лечение_ID, Дата_изменения)
 );
 
 create table Врач_Специализация (
@@ -124,8 +124,8 @@ alter table Прием
 alter table История_болезней
     add foreign key (Состояние_ID)
         references Состояние(Состояние_ID),
-    add foreign key (Пациент_ID)
-        references Пациент(Пациент_ID);
+    add foreign key (Лечение_ID)
+        references Лечение(Лечение_ID);
 
 alter table Врач_Специализация
     add foreign key (Врач_ID)
