@@ -6,4 +6,4 @@ else
     100 * V3."Вылеченные пациенты" / V3."Всего пациентов"
 end as "Процент вылеченных пациентов"
 from V3
-    inner join Врач v using (Врач_ID);
+inner join Врач v using (Врач_ID);
