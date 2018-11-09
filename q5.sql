@@ -1,3 +1,3 @@
 create role testgroup;
-grant update (Лечение_ID) on Завершенные_лечения to testgroup;
-grant testgruop to test;
+grant update ("Время лечения") on V1 to testgroup;
+grant testgroup to test;

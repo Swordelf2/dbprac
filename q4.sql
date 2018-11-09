@@ -1,1 +1,1 @@
-grant select on Завершенные_лечения to test;
+grant select on V1 to test;
